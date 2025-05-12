@@ -1,0 +1,4 @@
+1. Setup DNS Server for mail(https://www.twilio.com/docs/sendgrid/ui/account-and-settings/how-to-set-up-domain-authentication?_gl=1*2yyux*_gcl_au*NDI5NDE1NjQyLjE3MjYwMjg4MzU.*_ga*MTU3MDYzOTYwMC4xNzI1MjczNTEx*_ga_RRP8K4M4F3*MTcyNzY4MDA2OS45LjEuMTcyNzY4MTE4Mi4wLjAuMA..)
+Then change Sendgrid email integration(https://console.twilio.com/us1/develop/verify/settings/email)
+2. Contact Twilio Sales for Whatsapp.
+3. 
