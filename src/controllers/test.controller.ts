@@ -6,11 +6,6 @@ import {
 import { BadRequestException } from '../errors/BadRequestException.error';
 import { TestService } from '../services/tests.services';
 import { CustomException } from '../errors/CustomException.error';
-import {
-  deleteMultipleFilesS3,
-  extractS3Fullpaths,
-  rollbackMultipleFileS3,
-} from '../middleware/fileUploadS3.middleware';
 
 const testService = new TestService();
 
@@ -73,75 +68,3 @@ export const fileDeleteTest = async (req: Request, res: Response) => {
       .json({ message: 'Something went wrong! Please try again.', code: 500 });
   }
 };
-
-export async function fileUploadS3Test(req: Request, res: Response) {
-  try {
-    // throw new BadRequestException('Bad request exception thrown') // Will run "rollbackMultipleFileLocalUpload" and delete files automatically
-
-    if (req.body.file_upload_status)
-      throw new BadRequestException(req.body.file_upload_status);
-
-    res.status(201).json({
-      message: 'Success. Check the public/{folderName} to view uploaded file.',
-      data: req.files,
-    });
-  } catch (e: any) {
-    await rollbackMultipleFileS3(req);
-
-    if (e instanceof CustomException) {
-      return res
-        .status(e.statusCode)
-        .json({ message: e.message, code: e.statusCode });
-    }
-
-    return res
-      .status(500)
-      .json({ message: 'Something went wrong! Please try again.', code: 500 });
-  }
-}
-
-export async function fileDeleteS3Test(req: Request, res: Response) {
-  try {
-    await deleteMultipleFilesS3(req.body.delete_files);
-
-    res.status(201).json({
-      message:
-        'Success. Check the public/{folderName} to confirm deleteion file.',
-      request: req.body,
-      files: req.files,
-      file: req.file,
-    });
-  } catch (e: any) {
-    if (e instanceof CustomException) {
-      return res
-        .status(e.statusCode)
-        .json({ message: e.message, code: e.statusCode });
-    }
-
-    return res
-      .status(500)
-      .json({ message: 'Something went wrong! Please try again.', code: 500 });
-  }
-}
-
-export async function fileDeleteFullpathsS3Test(req: Request, res: Response) {
-  try {
-    const paths = extractS3Fullpaths(req.body.fullpaths);
-    await deleteMultipleFilesS3(paths);
-
-    res.status(201).json({
-      message: 'Success.',
-      paths: paths,
-    });
-  } catch (e: any) {
-    if (e instanceof CustomException) {
-      return res
-        .status(e.statusCode)
-        .json({ message: e.message, code: e.statusCode });
-    }
-
-    return res
-      .status(500)
-      .json({ message: 'Something went wrong! Please try again.', code: 500 });
-  }
-}

@@ -1,5 +1,6 @@
-import { rollbackMultipleFileS3 } from '../middleware/fileUploadS3.middleware';
+// import { rollbackMultipleFileS3 } from '../middleware/fileUploadS3.middleware';
 import { z } from 'zod';
+import { rollbackMultipleFileLocalUpload } from '../middleware/fileUploadLocal.middleware';
 
 export const validateRequestBody =
   (schema: z.ZodSchema) => async (req: any, res: any, next: any) => {
@@ -11,7 +12,8 @@ export const validateRequestBody =
       });
       next();
     } catch (error: any) {
-      rollbackMultipleFileS3(req);
+      // rollbackMultipleFileS3(req);
+      rollbackMultipleFileLocalUpload(req);
       if (error instanceof z.ZodError) {
         res.status(422).json({
           status: 'error',

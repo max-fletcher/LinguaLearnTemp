@@ -13,12 +13,12 @@ import {
   updateAvatar,
   updateName,
   updateNotificationStatus,
-  updateProfileImage,
+  // updateProfileImage,
   updateUsername,
   verifyOTPForDeleteAppUser,
 } from '../../controllers/app/user.controller';
 import { appUserUsernameSetMiddleware } from '../../middleware/appUserUsernameSet.middleware';
-import { s3FileUploader } from '../../middleware/fileUploadS3.middleware';
+// import { s3FileUploader } from '../../middleware/fileUploadS3.middleware';
 import { JwtMiddleware } from '../../middleware/jwt.middleware';
 import { appUserVerifiedMiddleware } from '../../middleware/verified.middleware';
 import {
@@ -28,7 +28,7 @@ import {
   emailSchema,
   nameSchema,
   phoneNoSchema,
-  profileImageSchama,
+  // profileImageSchama,
   usernameSchema,
   whatsappNoSchema,
 } from '../../schema/app-auth.schema';
@@ -118,22 +118,22 @@ appUserRouter
     validateRequestBody(avatarSchama),
     updateAvatar,
   )
-  .post(
-    '/update_profile_image',
-    jwtMiddleware.verifyAppUserToken,
-    appUserVerifiedMiddleware,
-    appUserUsernameSetMiddleware,
-    s3FileUploader(
-      [
-        { name: 'profile_image', maxCount: 1 },
-        { name: 'avatar_url', maxCount: 1 },
-      ],
-      'app_user_profile_images',
-      31457280,
-    ),
-    validateRequestBody(profileImageSchama),
-    updateProfileImage,
-  )
+  // .post(
+  //   '/update_profile_image',
+  //   jwtMiddleware.verifyAppUserToken,
+  //   appUserVerifiedMiddleware,
+  //   appUserUsernameSetMiddleware,
+  //   s3FileUploader(
+  //     [
+  //       { name: 'profile_image', maxCount: 1 },
+  //       { name: 'avatar_url', maxCount: 1 },
+  //     ],
+  //     'app_user_profile_images',
+  //     31457280,
+  //   ),
+  //   validateRequestBody(profileImageSchama),
+  //   updateProfileImage,
+  // )
   .post(
     '/update_notification_status',
     jwtMiddleware.verifyAppUserToken,
