@@ -5,7 +5,7 @@ export type AdminUserPayload = {
 
 export type AppUserPayload = {
   id: string;
-  phone_number: string | null;
+  phoneNumber: string | null;
   name: string | null;
   email: string;
   avatarUrl: string | null;

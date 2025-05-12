@@ -1,3 +1,4 @@
+import { UserVerificationStatus } from '../../../constants/enums';
 import { UserClient } from '../../clients/postgres.client';
 import {
   Model,
@@ -13,10 +14,10 @@ class UserModel extends Model<
   InferCreationAttributes<UserModel>
 > {
   declare id: string
-  declare phone_number: string
-  declare name?: string | null
+  declare phoneNumber: string
+  declare firstName: string | null
+  declare lastName: string | null
   declare email?: string | null
-  declare password: string
   declare streak: number
   declare xpPoints: number
   declare avatarUrl?: string | null
@@ -25,6 +26,7 @@ class UserModel extends Model<
   declare proficiencyLevel?: string | null
   declare isNewUser: boolean
   declare lastLoginAt: string
+  declare verified: string
 }
 
 UserModel.init(
@@ -33,21 +35,22 @@ UserModel.init(
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    phone_number: {
+    phoneNumber: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
     },
-    name: {
+    firstName: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true,
-    },
-    password: {
-      type: DataTypes.STRING,
     },
     streak: {
       type: DataTypes.STRING,
@@ -63,13 +66,13 @@ UserModel.init(
     },
     nativeLanguage: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     learningGoal: {
       type: DataTypes.TEXT,
     },
     proficiencyLevel: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     isNewUser: {
       type: DataTypes.BOOLEAN,
@@ -78,7 +81,15 @@ UserModel.init(
     lastLoginAt: {
       type: DataTypes.DATE,
       defaultValue: Date.now(),
-    }
+    },
+    verified: {
+      type: DataTypes.ENUM(
+        UserVerificationStatus.VERIFIED,
+        UserVerificationStatus.UNVERIFIED,
+        UserVerificationStatus.BANNED,
+      ),
+      defaultValue: UserVerificationStatus.VERIFIED,
+    },
   },
   {
     tableName: 'users',

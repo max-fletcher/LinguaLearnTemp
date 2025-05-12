@@ -1,6 +1,8 @@
 // import {TestModel} from "./test.model"
 import { AdminUserModel } from './admin-users.model';
 import { UserModel } from './user.model';
+import { UserOTPModel } from './user-otp.model';
+import { CourseModel } from './course.model';
 // import { CashBalanceHistoryModel } from './cash-balance-histories.model';
 // import { CurrencyModel } from './currency.model';
 // import { PayoutRequestModel } from './payout-requests.model';
@@ -25,14 +27,14 @@ import { UserModel } from './user.model';
 //   as: 'admin_user',
 //   foreignKey: 'admin_user_id',
 // });
-// AdminUserModel.hasMany(ProfessionalEducationModel, {
-//   as: 'professional_education',
-//   foreignKey: 'admin_user_id',
-// });
-// ProfessionalEducationModel.belongsTo(AdminUserModel, {
-//   as: 'admin_user',
-//   foreignKey: 'admin_user_id',
-// });
+AdminUserModel.hasMany(CourseModel, {
+  as: 'courses',
+  foreignKey: 'createdBy',
+});
+CourseModel.belongsTo(AdminUserModel, {
+  as: 'admin_user',
+  foreignKey: 'createdBy',
+});
 // AdminUserModel.hasMany(ProfessionalExperienceModel, {
 //   as: 'professional_experience',
 //   foreignKey: 'admin_user_id',
@@ -167,6 +169,8 @@ import { UserModel } from './user.model';
 export {
   UserModel,
   AdminUserModel,
+  UserOTPModel,
+  CourseModel
   // CurrencyModel,
   // PayoutRequestModel,
   // ProfessionalEducationModel,

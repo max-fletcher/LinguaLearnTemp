@@ -5,6 +5,8 @@ import {
   UserUpdate,
 } from '../../../types/app.user.type';
 import { updateUserOptions } from 'types/repository.type';
+import { getEnvVar } from '../../../utils/common.utils';
+import { datetimeYMDHis } from '../../../utils/datetime.utils';
 export class AppUserRepository {
   constructor() {}
   async createUser(
@@ -127,20 +129,20 @@ export class AppUserRepository {
   //   )) as unknown as User;
   // }
 
-  // async setOtp(id: string, otp: string): Promise<User> {
-  //   const otp_validity = Number(getEnvVar('OTP_EXPIRY'));
-  //   return (await UserModel.update(
-  //     {
-  //       otp: otp,
-  //       otp_expires_at: datetimeYMDHis(null, 'mins', otp_validity),
-  //     },
-  //     {
-  //       where: {
-  //         id: id,
-  //       },
-  //     },
-  //   )) as unknown as User;
-  // }
+  async setOtp(id: string, otp: string): Promise<User> {
+    const otp_validity = Number(getEnvVar('OTP_EXPIRY'));
+    return (await UserModel.update(
+      {
+        otp: otp,
+        otp_expires_at: datetimeYMDHis(null, 'mins', otp_validity),
+      },
+      {
+        where: {
+          id: id,
+        },
+      },
+    )) as unknown as User;
+  }
 
   async deleteById(id: string): Promise<User> {
     return (await UserModel.destroy({

@@ -10,6 +10,7 @@ import { JwtMiddleware } from './middleware/jwt.middleware';
 import { adminUserRouter } from './routes/admin/user.routes';
 import { appAuthRouter } from './routes/app/auth.routes';
 import { testRouter } from './routes/test.routes';
+import { adminAuthRouter } from './routes/admin/auth.routes';
 
 // const numCPUs = os.cpus().length
 
@@ -43,9 +44,10 @@ const server = () => {
     // test router. for development purposes only
     app.use('/api/v1/test', testRouter);
     // admin routes
+    app.use('/api/v1/admin/auth', adminAuthRouter);
     app.use('/api/v1/admin', jwtMiddleware.verifyToken, adminUserRouter);
-  // // app routes
-  //   app.use('/api/v1/app/auth', appAuthRouter);
+    // // app routes
+    // app.use('/api/v1/app/auth', appAuthRouter);
 
     app.all('*', (req, res) => {
       res.status(404);

@@ -2,11 +2,10 @@ import { AppUserRepository } from '../../db/rdb/repositories/app-user.repository
 import { mapToUserModel } from '../../mapper/user.mapper';
 import {
   createUserBalanceId,
+  generateOtp,
   generateUserId /*, generateOtp*/,
 } from '../../utils/id.utils';
 import {
-  SocialAuthProviders,
-  UserAllDataTypes,
   UserUpdate,
   UserWithTimeStamps,
 } from '../../types/app.user.type';
@@ -24,26 +23,22 @@ import { Transaction } from 'sequelize';
 import { capitalizeFirstLetter } from '../../utils/string.utils';
 import { NameAndUsernameSchema } from 'schema/app-auth.schema';
 import { ValidationException } from '../../errors/ValidationException.error';
-import { CurrencyRepository } from '../../db/rdb/repositories/currency.repository';
 import { AppUserPayload } from 'schema/token-payload.schema';
-import { AppUserNotificationOptions, RegistrationMethod, ResendOTPChannel } from '../../constants/enums';
+import { ResendOTPChannel } from '../../constants/enums';
 
 export class AuthService {
   private appUserRepo: AppUserRepository;
-  private currencyRepo: CurrencyRepository;
 
   constructor() {
     this.appUserRepo = new AppUserRepository();
-    this.currencyRepo = new CurrencyRepository();
   }
 
   async loginWithPhone(phone: string, transaction: Transaction) {
-    const user: UserWithTimeStamps = await this.appUserRepo.findUserByPhone(phone);
-    // const otp = generateOtp();
+    const user = await this.appUserRepo.findUserByPhone(phone);
+    const otp = generateOtp();
 
     if (user) {
-      // await this.appUserRepo.setOtp(user.id, otp);
-      const userData = await this.appUserRepo.getUserProfile(user.id);
+      await this.appUserRepo.setOtp(user.id, otp);
 
       if(phone !== "+8801700000000"){
         const twilioVerifyServiceSid = getEnvVar('TWILIO_VERIFY_SERVICE_SID');

@@ -1,3 +1,41 @@
+export enum UserVerificationStatus {
+  VERIFIED = 'VERIFIED',
+  UNVERIFIED = 'UNVERIFIED',
+  BANNED = 'BANNED',
+}
+
+export const EXPECTED_USER_STATUS = [
+  UserVerificationStatus.VERIFIED,
+  UserVerificationStatus.UNVERIFIED,
+  UserVerificationStatus.BANNED,
+] as const;
+
+export enum Languages {
+  ENGLISH = 'ENGLISH',
+  BANGLA = 'BANGLA',
+  FRENCH = 'FRENCH',
+  SPANISH = 'SPANISH',
+}
+
+export const LANGUAGES = [
+  Languages.ENGLISH,
+  Languages.BANGLA,
+  Languages.FRENCH,
+  Languages.SPANISH,
+] as const;
+
+export enum Difficulty {
+  BEGINNER = 'BEGINNER',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
+}
+
+export const DIFFICULTIES = [
+  Difficulty.BEGINNER,
+  Difficulty.INTERMEDIATE,
+  Difficulty.ADVANCED,
+] as const;
+
 // export enum UserTypes {
 //   SUPERADMIN = 'SUPERADMIN',
 //   ADMIN = 'ADMIN',

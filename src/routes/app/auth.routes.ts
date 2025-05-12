@@ -3,12 +3,7 @@ import {
   authenticateAppUser,
   verifyOTP,
   resendOTP,
-  socialLogin,
-  updateNameAndUsername,
   usernameExists,
-  sendOTPToWhatsappOrEmail,
-  sendOTP,
-  checkAuthenticationStatus,
 } from '../../controllers/app/auth.controller';
 import { validateRequestBody } from '../../utils/validatiion.utils';
 import {
@@ -26,7 +21,7 @@ const appAuthRouter = express.Router();
 appAuthRouter
   .post('/login', validateRequestBody(phoneNoSchema), authenticateAppUser)
   .post(
-    '/verifyOTP/:channel?',
+    '/verifyOTP',
     jwtMiddleware.verifyAppUserToken,
     validateRequestBody(appVerifyOtpSchema),
     verifyOTP,
@@ -36,27 +31,12 @@ appAuthRouter
     jwtMiddleware.verifyAppUserToken,
     resendOTP
   )
-  .get(
-    '/sendOTPToWhatsappOrEmail/:channel',
-    jwtMiddleware.verifyAppUserToken,
-    sendOTPToWhatsappOrEmail,
-  )
-  .post('/socialLogin/:provider', socialLogin)
   .post(
     '/username_exists',
     jwtMiddleware.verifyAppUserToken,
     appUserVerifiedMiddleware,
     validateRequestBody(nameAndUsernameSchema),
     usernameExists,
-  )
-  .post(
-    '/update_name_and_username',
-    jwtMiddleware.verifyAppUserToken,
-    appUserVerifiedMiddleware,
-    validateRequestBody(nameAndUsernameSchema),
-    updateNameAndUsername,
-  )
-  .post('/sendOTP', jwtMiddleware.verifyAppUserToken, sendOTP)
-  .get('/check_auth_status', jwtMiddleware.verifyAppUserToken, checkAuthenticationStatus);
+  );
 
 export { appAuthRouter };

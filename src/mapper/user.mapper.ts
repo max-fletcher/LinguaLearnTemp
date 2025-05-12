@@ -106,14 +106,14 @@ export function mapToAppUserAuthResponse(
 
 export function mapAppUserGenerateToken(
   id: string,
-  phone_number: string,
+  phoneNumber: string,
   name: string | null,
   email: string | null,
   avatarUrl: string | null
 ): AppUserGenerateToken {
   return {
     id: id,
-    phone_number: phone_number,
+    phoneNumber: phoneNumber,
     name: name ? name : null,
     email: email ? email : null,
     avatarUrl: avatarUrl ? avatarUrl : null,

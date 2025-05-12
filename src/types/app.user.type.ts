@@ -10,7 +10,7 @@ export type User = InferAttributes<UserModel>;
 
 export type UserWithTimeStamps = {
   id: string
-  phone_number: string
+  phoneNumber: string
   name?: string
   email?: string | null
   password: string
@@ -27,7 +27,7 @@ export type UserWithTimeStamps = {
 };
 
 export type UserUpdate = {
-  phone_number: string
+  phoneNumber: string
   name?: string
   email?: string | null
   password: string
@@ -49,7 +49,7 @@ export type AnyStringKeyValuePair = {
 
 export type AppUserGenerateToken = {
   id: string,
-  phone_number: string,
+  phoneNumber: string,
   name: string | null,
   email: string | null,
   avatarUrl: string | null

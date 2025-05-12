@@ -15,7 +15,7 @@ export const withdrawRequestSchema = z.object({
   bank_name: z.string({ required_error: 'Bank name is required.' }).trim().min(1, { message: 'Bank name is required.' }).max(255, { message: 'Bank name cannot exceed 255 charaters.' }),
   bank_account_no: z.string({ required_error: 'Bank account no. is required.' }).trim().min(1, { message: 'Bank account no. is required.' }).max(255, { message : 'Bank account no. cannot exceed 255 charaters.' }),
   zip_code: z.string({ required_error: 'Zip code is required.' }).min(1).max(255, { message: 'Zip code cannot exceed 255 charaters.' }),
-  phone_number: z.string({ required_error: 'Phone number is required.' }).min(1, { message: 'Phone number is required.' }).max(255, { message: 'Phone number cannot exceed 255 charaters.' }),
+  phoneNumber: z.string({ required_error: 'Phone number is required.' }).min(1, { message: 'Phone number is required.' }).max(255, { message: 'Phone number cannot exceed 255 charaters.' }),
 });
 
 export type WithdrawRequestSchema = z.infer<typeof withdrawRequestSchema>;

@@ -52,7 +52,7 @@ export async function getSinglePayout(req: AdminAuthenticatedRequest, res: Respo
         bank_name: payout.bank_name,
         bank_account_no: payout.bank_account_no,
         zip_code: payout.zip_code,
-        phone_number: payout.phone_number,
+        phoneNumber: payout.phoneNumber,
         status: payout.status,
         createdAt: payout.createdAt,
         updatedAt: payout.updatedAt,

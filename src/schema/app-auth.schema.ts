@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { imageValidationS3Rule } from './common.schema';
-import { REASON_FOR_ACCOUNT_DELETION_TYPES } from '../constants/enums';
 
 export const phoneNoSchema = z.object({
   phone: z
@@ -94,10 +93,6 @@ export type AvatarSchema = z.infer<typeof avatarSchama>;
 export const profileImageSchama = z.object({
   avatar_url: z.array(imageValidationS3Rule).optional().nullable(),
   profile_image: z.array(imageValidationS3Rule),
-});
-
-export const confirmAccountWipeoutSchema = z.object({
-  reason: z.enum(REASON_FOR_ACCOUNT_DELETION_TYPES, {required_error: 'Reason is required'}),
 });
 
 export type profileImageSchama = z.infer<typeof profileImageSchama>;

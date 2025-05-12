@@ -73,14 +73,10 @@ import express from 'express';
 //   updateAdminUserSchema,
 //   updateUserProfileSchema,
 // } from '../../schema/user.schema';
-import { validateRequestBody } from '../../utils/validatiion.utils';
-import { loginRequestSchema } from '../../schema/login.schema';
-import { login } from '../../controllers/admin/auth.controller';
+// import { validateRequestBody } from '../../utils/validatiion.utils';
 
 const adminUserRouter = express.Router();
 // const formData = multer();
-
-adminUserRouter.post('/login', validateRequestBody(loginRequestSchema), login);
 
 // adminUserRouter.post(
 //   '/profile/update',
