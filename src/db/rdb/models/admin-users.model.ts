@@ -16,8 +16,8 @@ class AdminUserModel extends Model<
   declare id: string
   declare firstName: string
   declare lastName: string
-  declare email?: string | null
-  declare phoneNumber?: string | null
+  declare email: string | null
+  declare phoneNumber: string | null
   declare password: string
 }
 

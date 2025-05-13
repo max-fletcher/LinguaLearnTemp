@@ -1,4 +1,4 @@
-import { UserVerificationStatus } from '../../../constants/enums';
+import { ProficiencyLevel, AppUserVerificationStatus } from '../../../constants/enums';
 import { UserClient } from '../../clients/postgres.client';
 import {
   Model,
@@ -15,12 +15,12 @@ class UserModel extends Model<
 > {
   declare id: string
   declare phoneNumber: string
-  declare firstName: string | null
-  declare lastName: string | null
-  declare email?: string | null
+  declare firstName: string
+  declare lastName: string
+  declare email: string | null
   declare streak: number
   declare xpPoints: number
-  declare avatarUrl?: string | null
+  declare avatarUrl: string | null
   declare nativeLanguage: string
   declare learningGoal: string
   declare proficiencyLevel?: string | null
@@ -53,11 +53,11 @@ UserModel.init(
       unique: true,
     },
     streak: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
     },
     xpPoints: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
     },
     avatarUrl: {
@@ -72,7 +72,13 @@ UserModel.init(
       type: DataTypes.TEXT,
     },
     proficiencyLevel: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(
+        ProficiencyLevel.BEGINNER,
+        ProficiencyLevel.INTERMEDIATE,
+        ProficiencyLevel.ADVANCED,
+      ),
+      allowNull: false,
+      defaultValue: ProficiencyLevel.BEGINNER
     },
     isNewUser: {
       type: DataTypes.BOOLEAN,
@@ -84,11 +90,11 @@ UserModel.init(
     },
     verified: {
       type: DataTypes.ENUM(
-        UserVerificationStatus.VERIFIED,
-        UserVerificationStatus.UNVERIFIED,
-        UserVerificationStatus.BANNED,
+        AppUserVerificationStatus.VERIFIED,
+        AppUserVerificationStatus.UNVERIFIED,
+        AppUserVerificationStatus.BANNED,
       ),
-      defaultValue: UserVerificationStatus.VERIFIED,
+      defaultValue: AppUserVerificationStatus.VERIFIED,
     },
   },
   {

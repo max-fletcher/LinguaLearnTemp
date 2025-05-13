@@ -1,13 +1,13 @@
-export enum UserVerificationStatus {
+export enum AppUserVerificationStatus {
   VERIFIED = 'VERIFIED',
   UNVERIFIED = 'UNVERIFIED',
   BANNED = 'BANNED',
 }
 
-export const EXPECTED_USER_STATUS = [
-  UserVerificationStatus.VERIFIED,
-  UserVerificationStatus.UNVERIFIED,
-  UserVerificationStatus.BANNED,
+export const APP_USER_VERIFICATION_STATUSES = [
+  AppUserVerificationStatus.VERIFIED,
+  AppUserVerificationStatus.UNVERIFIED,
+  AppUserVerificationStatus.BANNED,
 ] as const;
 
 export enum Languages {
@@ -31,6 +31,18 @@ export enum Difficulty {
 }
 
 export const DIFFICULTIES = [
+  Difficulty.BEGINNER,
+  Difficulty.INTERMEDIATE,
+  Difficulty.ADVANCED,
+] as const;
+
+export enum ProficiencyLevel {
+  BEGINNER = 'BEGINNER',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
+}
+
+export const PROFICIENCY_LEVELS = [
   Difficulty.BEGINNER,
   Difficulty.INTERMEDIATE,
   Difficulty.ADVANCED,

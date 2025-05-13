@@ -6,7 +6,7 @@ import {
   generateUserId /*, generateOtp*/,
 } from '../../utils/id.utils';
 import {
-  UserUpdate,
+  UpdateAppUser,
   UserWithTimeStamps,
 } from '../../types/app.user.type';
 import fs from 'fs';
@@ -219,7 +219,7 @@ export class AuthService {
     if (verificationCheck) {
       if (verificationCheck.status === 'approved' && verificationCheck.valid) {
         if (verifyAppUserId) {
-          const data: UserUpdate = { verified: true };
+          const data: UpdateAppUser = { verified: true };
           const updated = await this.appUserRepo.updateUser(
             data,
             verifyAppUserId,
@@ -486,7 +486,7 @@ export class AuthService {
     userExists = await this.appUserRepo.findUserByEmail(data.email);
 
     if (userExists) {
-      const updateUser: UserUpdate = {
+      const updateUser: UpdateAppUser = {
         username: userExists.username ?? data.displayName,
         providers: [
           ...userExists.providers,

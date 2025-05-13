@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import { MigrationService } from '../services/migration.services';
-import { multipleFileLocalUploader } from '../middleware/fileUploadLocal.middleware';
+// import { multipleFileLocalUploader } from '../middleware/fileUploadLocal.middleware';
 import {
   fileDeleteTest,
-  fileUploadTest,
+  // fileUploadTest,
 } from '../controllers/test.controller';
 import { NodeCacheService } from '../services/node-cache.services';
 
@@ -30,18 +30,18 @@ testRouter.get('/db', async (req: Request, res: Response) => {
   }
 });
 
-testRouter.post(
-  '/fileUploadTest',
-  multipleFileLocalUploader(
-    [
-      { name: 'images1', maxCount: 1 },
-      { name: 'images2', maxCount: 2 },
-    ],
-    'files',
-    31457280,
-  ),
-  fileUploadTest,
-);
+// testRouter.post(
+//   '/fileUploadTest',
+//   multipleFileLocalUploader(
+//     [
+//       { name: 'images1', maxCount: 1 },
+//       { name: 'images2', maxCount: 2 },
+//     ],
+//     'files',
+//     31457280,
+//   ),
+//   fileUploadTest,
+// );
 
 testRouter.delete('/fileDeleteTest/:id', fileDeleteTest);
 

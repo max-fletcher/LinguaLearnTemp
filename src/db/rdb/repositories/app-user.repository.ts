@@ -2,9 +2,9 @@ import { Op, Transaction } from 'sequelize';
 import { UserModel } from '../models';
 import {
   User,
-  UserUpdate,
+  UpdateAppUser,
+  StoreAppUser,
 } from '../../../types/app.user.type';
-import { updateUserOptions } from 'types/repository.type';
 import { getEnvVar } from '../../../utils/common.utils';
 import { datetimeYMDHis } from '../../../utils/datetime.utils';
 export class AppUserRepository {
@@ -51,66 +51,47 @@ export class AppUserRepository {
     });
   }
 
-  async userExistsByUsername(
-    username: string,
-    id: string | null = null,
-  ): Promise<number> {
-    const options: { where: { username: string; id?: object } } = {
-      where: {
-        username: username,
-      },
-    };
-    if (id) options.where.id = { [Op.ne]: id };
-
-    return await UserModel.count(options);
-  }
-
-  async findUserByEmail(email: string): Promise<User> {
-    return (await UserModel.findOne({
-      where: {
-        email: email,
-      },
-    })) as unknown as User;
-  }
-
-  async userExistsByEmail(
-    email: string,
-    id: string | null = null,
-  ): Promise<User> {
+  async findUserByEmail(email: string, exceptId: string | null = null): Promise<User> {
     const options: { where: { email: string; id?: object } } = {
       where: {
         email: email,
       },
     };
-    if (id) options.where.id = { [Op.ne]: id };
 
-    return (await UserModel.count(options)) as unknown as User;
-  }
-
-  async findUserByPhone(
-    phone: string,
-    id: string | null = null,
-  ): Promise<User> {
-    const options: { where: { phone: string; id?: object } } = {
-      where: {
-        phone: phone,
-      },
-    };
-    if (id) options.where.id = { [Op.ne]: id };
+    if (exceptId) options.where.id = { [Op.ne]: exceptId };
 
     return (await UserModel.findOne(options)) as unknown as User;
   }
 
-  async userExistsByPhone(
-    phone: string,
-    id: string | null = null,
-  ): Promise<User> {
-    const options: { where: { phone: string; id?: object } } = {
+  async userExistsByEmail(email: string, exceptId: string | null = null): Promise<User> {
+    const options: { where: { email: string; id?: object } } = {
       where: {
-        phone: phone,
+        email: email,
       },
     };
-    if (id) options.where.id = { [Op.ne]: id };
+    if (exceptId) options.where.id = { [Op.ne]: exceptId };
+
+    return (await UserModel.count(options)) as unknown as User;
+  }
+
+  async findUserByPhone(phoneNumber: string, exceptId: string | null = null): Promise<User> {
+    const options: { where: { phoneNumber: string; id?: object } } = {
+      where: {
+        phoneNumber: phoneNumber,
+      },
+    };
+    if (exceptId) options.where.id = { [Op.ne]: exceptId };
+
+    return (await UserModel.findOne(options)) as unknown as User;
+  }
+
+  async userExistsByPhone(phoneNumber: string, exceptId: string | null = null): Promise<User> {
+    const options: { where: { phoneNumber: string; id?: object } } = {
+      where: {
+        phoneNumber: phoneNumber,
+      },
+    };
+    if (exceptId) options.where.id = { [Op.ne]: exceptId };
 
     return (await UserModel.count(options)) as unknown as User;
   }
@@ -129,20 +110,20 @@ export class AppUserRepository {
   //   )) as unknown as User;
   // }
 
-  async setOtp(id: string, otp: string): Promise<User> {
-    const otp_validity = Number(getEnvVar('OTP_EXPIRY'));
-    return (await UserModel.update(
-      {
-        otp: otp,
-        otp_expires_at: datetimeYMDHis(null, 'mins', otp_validity),
-      },
-      {
-        where: {
-          id: id,
-        },
-      },
-    )) as unknown as User;
-  }
+  // async setOtp(id: string, otp: string): Promise<User> {
+  //   const otp_validity = Number(getEnvVar('OTP_EXPIRY'));
+  //   return (await UserModel.update(
+  //     {
+  //       // otp: otp,
+  //       otp_expires_at: datetimeYMDHis(null, 'mins', otp_validity),
+  //     },
+  //     {
+  //       where: {
+  //         id: id,
+  //       },
+  //     },
+  //   )) as unknown as User;
+  // }
 
   async deleteById(id: string): Promise<User> {
     return (await UserModel.destroy({
@@ -152,12 +133,16 @@ export class AppUserRepository {
     })) as unknown as User;
   }
 
-  async updateUser(
-    data: UserUpdate,
-    id: string,
-    transaction?: Transaction,
-  ): Promise<User> {
-    const options: updateUserOptions = {
+  async storeAppUser(data: User, transaction?: Transaction): Promise<User> {
+    const options: any = {};
+
+    if(transaction) options.transaction = transaction;
+
+    return await UserModel.create(data, options) as unknown as User;
+  }
+
+  async updateAppUser(data: UpdateAppUser, id: string, transaction?: Transaction): Promise<User> {
+    const options: any = {
       where: {
         id: id,
       },

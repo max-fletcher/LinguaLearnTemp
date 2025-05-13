@@ -1,4 +1,4 @@
-import { UserModel } from '../db/rdb/models/user.model';
+import { UserModel } from '../db/rdb/models/app-user.model';
 import { InferAttributes } from 'sequelize';
 
 export type UserMongo = {
@@ -11,34 +11,58 @@ export type User = InferAttributes<UserModel>;
 export type UserWithTimeStamps = {
   id: string
   phoneNumber: string
-  name?: string
+  firstName: string
+  lastName: string
   email?: string | null
   password: string
   streak: number
   xpPoints: number
-  avatarUrl?: string | null
+  avatarUrl: string | null
   nativeLanguage: string
   learningGoal: string
-  proficiencyLevel?: string | null
+  proficiencyLevel: string | null
   isNewUser: boolean
   lastLoginAt: string
+  verified: string
   createdAt?: string | null
   updatedAt?: string | null
 };
 
-export type UserUpdate = {
+export type StoreAppUser = {
   phoneNumber: string
-  name?: string
-  email?: string | null
+  firstName: string
+  lastName: string
+  email: string | null
   password: string
   streak: number
   xpPoints: number
-  avatarUrl?: string | null
+  avatarUrl: string | null
   nativeLanguage: string
   learningGoal: string
   proficiencyLevel?: string | null
   isNewUser: boolean
   lastLoginAt: string
+  verified: string
+  createdAt?: string | null
+  updatedAt?: string | null
+};
+
+export type UpdateAppUser = {
+  id?: string
+  phoneNumber: string
+  firstName: string
+  lastName: string
+  email: string | null
+  password: string
+  streak: number
+  xpPoints: number
+  avatarUrl: string | null
+  nativeLanguage: string
+  learningGoal: string
+  proficiencyLevel?: string | null
+  isNewUser: boolean
+  lastLoginAt: string
+  verified: string
   createdAt?: string | null
   updatedAt?: string | null
 };

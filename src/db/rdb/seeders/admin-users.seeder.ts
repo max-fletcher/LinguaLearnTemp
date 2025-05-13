@@ -1,5 +1,5 @@
 // import { UserStatus, UserTypes } from '../../../constants/enums';
-import { createAdminUserId } from '../../../utils/id.utils';
+import { generateId } from '../../../utils/id.utils';
 import { hashPassword } from '../../../utils/password.utils';
 import { AdminUserModel } from '../models';
 
@@ -7,7 +7,7 @@ const seedAdminUsers = async () => {
   try {
     const adminUsers = [
       {
-        id: createAdminUserId(),
+        id: generateId(),
         firstName: 'Admin',
         lastName: 'One',
         email: 'admin1@mail.com',

@@ -58,6 +58,7 @@
     "square": "^41.0.0",
     "stripe": "^17.1.0",
     "twilio": "^5.3.0",
+    "uuid": "^11.1.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

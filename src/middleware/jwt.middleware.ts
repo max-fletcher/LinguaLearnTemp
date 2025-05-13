@@ -49,8 +49,14 @@ export class JwtMiddleware {
         throw new UnauthorizedException('Token Expired');
       }
     } catch (e: any) {
+      console.log('admin verifyToken middleware', e);
       if (e instanceof UnauthorizedException)
-        return res.status(401).json({ message: e.message });
+        res.status(e.statusCode).json({
+          error:{
+            message: e.message,
+          },
+          code: e.statusCode,
+        });
 
       return res
         .status(500)

@@ -4,7 +4,7 @@ import fs from 'fs';
 import multer, { FileFilterCallback } from 'multer';
 import {
   fieldsType,
-  fileFieldNameType,
+  fieldType,
   formattedPathsType,
 } from 'types/file.types';
 
@@ -13,7 +13,7 @@ type FileNameCallback = (error: Error | null, filename: string) => void;
 
 // FILEFIELDNAME(required), DEFAULT PATH = 'temp' & DEFAULT MAXSIZE = 30 MB
 export const multipleFileLocalUploader = (
-  fileFieldName: fileFieldNameType,
+  fileFieldName: fieldType,
   path = 'temp',
   maxSize = 31457280,
 ) => {
@@ -70,7 +70,6 @@ export const multipleFileLocalUploader = (
   // RETURN MULTER INSTANCE WITH NECESSARY OPTIONS
   return multer({
     storage: storage,
-    // limits: limits,
     fileFilter: additionalValidation,
   }).fields(fileFieldName);
 };
@@ -142,7 +141,8 @@ export const multipleFileLocalFullPathResolver = (req: Request) => {
               fields.path.indexOf('\\') + 1,
               fields.path.lastIndexOf('\\'),
             )
-            .replace('public\\', '') +
+            .replace('public\\', '')
+            .replace('\\', '/') +
           '/' +
           fields.filename,
         ...paths,

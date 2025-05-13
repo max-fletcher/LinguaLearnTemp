@@ -1,4 +1,4 @@
-import { Difficulty, Languages } from '../../../constants/enums';
+import { Difficulty } from '../../../constants/enums';
 import { UserClient } from '../../clients/postgres.client';
 import {
   Model,
@@ -9,28 +9,32 @@ import {
 
 const sequelize = UserClient.getInstance();
 
-class CourseModel extends Model<
-  InferAttributes<CourseModel>,
-  InferCreationAttributes<CourseModel>
+class LessonModel extends Model<
+  InferAttributes<LessonModel>,
+  InferCreationAttributes<LessonModel>
 > {
   declare id: string
+  declare dayId: string
   declare title: string
   declare description: string | null
-  declare totalDays: string
-  declare language: string
-  declare targetLanguage: string
+  declare estimatedMinutes: number
   declare difficulty: string
-  declare imagePath: string
-  declare estimatedHours: string
+  declare audioIntro: string
+  declare xpReward: number
+  declare lessonOrder: number
   declare createdBy: string
   declare updatedBy: string
 }
 
-CourseModel.init(
+LessonModel.init(
   {
     id: {
       type: DataTypes.STRING,
       primaryKey: true,
+    },
+    dayId: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     title: {
       type: DataTypes.STRING,
@@ -40,28 +44,8 @@ CourseModel.init(
       type: DataTypes.STRING,
       defaultValue: null,
     },
-    totalDays: {
+    estimatedMinutes: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    language: {
-      type: DataTypes.ENUM(
-        Languages.ENGLISH,
-        Languages.BANGLA,
-        Languages.FRENCH,
-        Languages.SPANISH
-      ),
-      allowNull: false,
-      defaultValue: Languages.ENGLISH,
-    },
-    targetLanguage: {
-      type: DataTypes.ENUM(
-        Languages.ENGLISH,
-        Languages.BANGLA,
-        Languages.FRENCH,
-        Languages.SPANISH
-      ),
-      defaultValue: Languages.ENGLISH,
       allowNull: false,
     },
     difficulty: {
@@ -73,11 +57,15 @@ CourseModel.init(
       defaultValue: Difficulty.BEGINNER,
       allowNull: false,
     },
-    imagePath: {
+    audioIntro: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
-    estimatedHours: {
+    xpReward: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 50
+    },
+    lessonOrder: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -91,10 +79,10 @@ CourseModel.init(
     },
   },
   {
-    tableName: 'courses',
+    tableName: 'lessons',
     sequelize,
     timestamps: true,
   },
 );
 
-export { CourseModel };
+export { LessonModel };

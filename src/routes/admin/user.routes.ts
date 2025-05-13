@@ -1,4 +1,9 @@
 import express from 'express';
+import { JwtMiddleware } from '../../middleware/jwt.middleware';
+import { createAppUser, getAllAppUsers, updateAppUser } from '../../controllers/admin/app-user.controller';
+import { validateRequestBody } from '../../utils/validatiion.utils';
+import { createAppUserSchema, updateAppUserSchema } from '../../schema/app-user.schema';
+import { multipleFileLocalUploader } from '../../middleware/fileUploadLocal.middleware';
 // import multer from 'multer';
 // import {
 //   createAdminUser,
@@ -77,6 +82,7 @@ import express from 'express';
 
 const adminUserRouter = express.Router();
 // const formData = multer();
+const jwtMiddleware = new JwtMiddleware();
 
 // adminUserRouter.post(
 //   '/profile/update',
@@ -96,11 +102,28 @@ const adminUserRouter = express.Router();
 //   storeWorkExperience,
 // );
 
-// adminUserRouter.get(
-//   '/professional-profile/experiences',
-//   userRoleMiddleware([UserTypes.PROFESSIONAL]),
-//   getExperiences,
-// );
+adminUserRouter.get('/users', jwtMiddleware.verifyToken, getAllAppUsers);
+adminUserRouter.post(
+  '/users',
+  jwtMiddleware.verifyToken,
+  multipleFileLocalUploader(
+    [
+      { name: 'avatarUrl', maxCount: 1 },
+    ],
+    'users',
+    1048576, // 5 MB
+  ),
+  validateRequestBody(createAppUserSchema),
+  createAppUser,
+);
+adminUserRouter.patch(
+  '/users',
+  jwtMiddleware.verifyToken,
+  validateRequestBody(updateAppUserSchema),
+  updateAppUser,
+);
+
+// adminUserRouter.get('/courses', jwtMiddleware.verifyToken, getAllCourses);
 
 // adminUserRouter.get(
 //   '/professional-profile/experiences/:id',

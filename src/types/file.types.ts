@@ -1,4 +1,4 @@
-export type fileFieldNameType =
+export type fieldType =
   | {
       name: string;
       maxCount: number;

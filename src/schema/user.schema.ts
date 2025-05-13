@@ -1,6 +1,5 @@
 import { Op } from 'sequelize';
 import { z } from 'zod';
-import { EXPECTED_USER_STATUS, EXPECTED_USER_TYPES } from '../constants/enums';
 import { AdminUserModel } from '../db/rdb/models';
 import { imageValidationS3Rule } from './common.schema';
 
@@ -41,8 +40,8 @@ export const createAdminUserSchema = z
     username: z.string().trim().min(1, { message: 'Required' }).max(128),
     email: z.string().trim().min(1, { message: 'Required' }).email(),
     phone: z.string().max(128).nullable().optional(),
-    user_type: z.enum(EXPECTED_USER_TYPES, { required_error: 'Required' }),
-    status: z.enum(EXPECTED_USER_STATUS, { required_error: 'Required' }),
+    // user_type: z.enum(EXPECTED_USER_TYPES, { required_error: 'Required' }),
+    // status: z.enum(EXPECTED_USER_STATUS, { required_error: 'Required' }),
     password: z.string().min(8, { message: 'Required' }).max(128),
   })
   .superRefine(async (data, ctx) => {
@@ -78,8 +77,8 @@ export const updateAdminUserSchema = z
     username: z.string().trim().min(1, { message: 'Required' }).max(128),
     email: z.string().trim().min(1, { message: 'Required' }).email(),
     phone: z.string().max(128).nullable().optional(),
-    user_type: z.enum(EXPECTED_USER_TYPES, { required_error: 'Required' }),
-    status: z.enum(EXPECTED_USER_STATUS, { required_error: 'Required' }),
+    // user_type: z.enum(EXPECTED_USER_TYPES, { required_error: 'Required' }),
+    // status: z.enum(EXPECTED_USER_STATUS, { required_error: 'Required' }),
     password: z.string().max(128).optional(),
   })
   .refine(
@@ -162,4 +161,4 @@ export type RegistrationRequestSchema = z.infer<
 
 export type CreateAdminUserSchema = z.infer<typeof createAdminUserSchema>;
 export type UpdateAdminUserSchema = z.infer<typeof updateAdminUserSchema>;
-export type UpdateUserProfileSchema = z.infer<typeof updateUserProfileSchema>;
+export type UpdateAppUserProfileSchema = z.infer<typeof updateUserProfileSchema>;
