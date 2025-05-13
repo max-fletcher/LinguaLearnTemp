@@ -9,9 +9,9 @@ import {
 
 const sequelize = UserClient.getInstance();
 
-class UserModel extends Model<
-  InferAttributes<UserModel>,
-  InferCreationAttributes<UserModel>
+class AppUserModel extends Model<
+  InferAttributes<AppUserModel>,
+  InferCreationAttributes<AppUserModel>
 > {
   declare id: string
   declare phoneNumber: string
@@ -27,9 +27,12 @@ class UserModel extends Model<
   declare isNewUser: boolean
   declare lastLoginAt: string
   declare verified: string
+  declare updatedBy: string
+  declare deletedAt: string | null
+  declare deletedBy: string | null
 }
 
-UserModel.init(
+AppUserModel.init(
   {
     id: {
       type: DataTypes.STRING,
@@ -50,7 +53,7 @@ UserModel.init(
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      allowNull: true,
     },
     streak: {
       type: DataTypes.INTEGER,
@@ -94,7 +97,19 @@ UserModel.init(
         AppUserVerificationStatus.UNVERIFIED,
         AppUserVerificationStatus.BANNED,
       ),
-      defaultValue: AppUserVerificationStatus.VERIFIED,
+      defaultValue: AppUserVerificationStatus.UNVERIFIED,
+    },
+    updatedBy: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
+    deletedBy: {
+      type: DataTypes.STRING,
+      defaultValue: null,
     },
   },
   {
@@ -104,4 +119,4 @@ UserModel.init(
   },
 );
 
-export { UserModel };
+export { AppUserModel };

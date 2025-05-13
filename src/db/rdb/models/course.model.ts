@@ -22,8 +22,9 @@ class CourseModel extends Model<
   declare difficulty: string
   declare imagePath: string
   declare estimatedHours: string
-  declare createdBy: string
   declare updatedBy: string
+  declare deletedAt: string | null
+  declare deletedBy: string | null
 }
 
 CourseModel.init(
@@ -81,13 +82,17 @@ CourseModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    createdBy: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     updatedBy: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
+    deletedBy: {
+      type: DataTypes.STRING,
+      defaultValue: null,
     },
   },
   {

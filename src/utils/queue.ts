@@ -1,6 +1,6 @@
 import Agenda from "agenda";
 import { getEnvVar } from '../utils/common.utils';
-import { AppUserService } from "../services/user.services";
+import { AppUserService } from "../services/app-user.services";
 import { UserClient } from "../db/clients/postgres.client";
 import { AppUserBalanceService } from "../services/app-user-balance.services";
 import { CustomException } from "../errors/CustomException.error";

@@ -17,8 +17,9 @@ class DayModel extends Model<
   declare dayNumber: number
   declare title: string
   declare description: string | null
-  declare createdBy: string
   declare updatedBy: string
+  declare deletedAt: string | null
+  declare deletedBy: string | null
 }
 
 DayModel.init(
@@ -43,13 +44,17 @@ DayModel.init(
       type: DataTypes.STRING,
       defaultValue: null,
     },
-    createdBy: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     updatedBy: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
+    deletedBy: {
+      type: DataTypes.STRING,
+      defaultValue: null,
     },
   },
   {

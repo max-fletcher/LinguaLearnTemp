@@ -1,7 +1,7 @@
 // import { CurrencyData } from 'types/currency.type';
 // import { AppUserStatus } from '../../../constants/enums';
 // import { hashPassword } from '../../../utils/password.utils';
-// import { UserModel } from '../models';
+// import { AppUserModel } from '../models';
 // import { CurrencyRepository } from '../repositories/currency.repository';
 
 const seedAppUsers = async () => {
@@ -108,7 +108,7 @@ const seedAppUsers = async () => {
     //   },
     // ];
 
-    // await UserModel.bulkCreate(appUsers);
+    // await AppUserModel.bulkCreate(appUsers);
     // console.log('App users have been seeded successfully');
   } catch (error) {
     // console.error('Error seeding app users:', error);

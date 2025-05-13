@@ -56,7 +56,7 @@ export class TestService {
     // COMMENTED TO MITIGATE TYPESCRIPT ERRORS
 
     // deleteMultipleFileLocal(req, rdsUser.images!);
-    const result = await this.userRepo.deleteById(id);
+    const result = await this.userRepo.hardDeleteById(id);
 
     if (!result)
       throw new CustomException('Failed to delete! Please try again.', 500);

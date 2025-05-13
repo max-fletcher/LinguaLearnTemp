@@ -22,8 +22,9 @@ class LessonModel extends Model<
   declare audioIntro: string
   declare xpReward: number
   declare lessonOrder: number
-  declare createdBy: string
   declare updatedBy: string
+  declare deletedAt: string | null
+  declare deletedBy: string | null
 }
 
 LessonModel.init(
@@ -69,13 +70,17 @@ LessonModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    createdBy: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     updatedBy: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
+    deletedBy: {
+      type: DataTypes.STRING,
+      defaultValue: null,
     },
   },
   {

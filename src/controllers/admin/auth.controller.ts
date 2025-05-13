@@ -22,8 +22,9 @@ export async function login(req: Request, res: Response) {
   
     return res.json({
       data: {
-        user: user,
+        message: 'Login successful.',
         jwt: token,
+        user: user,
       },
       status_code: 200,
     });

@@ -14,7 +14,7 @@ import {
   formatUserActiveTiers,
 } from '../../formatter/tier.formatter';
 // import { stripePaymentType } from '../../constants/enums';
-import { AppUserService } from '../../services/user.services';
+import { AppUserService } from '../../services/app-user.services';
 import { SquareService } from '../../services/square.services';
 import { SquareError } from 'square';
 import { UserClient } from '../../db/clients/postgres.client';

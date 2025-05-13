@@ -108,14 +108,14 @@ export const deleteMultipleFileLocal = async (
 
   filePaths.map(async (filePath) => {
     const tempFilePath =
-      'src/public/uploads/' +
+      'src/public/' +
       filePath.replace(
         (!process.env.FILE_BASE_URL || process.env.FILE_BASE_URL === ''
           ? req.protocol + '://' + req.get('host')
           : process.env.FILE_BASE_URL) + '/',
         '',
       );
-    // console.log(tempFilePath);
+    // console.log('tempFilePath', tempFilePath);
     if (fs.existsSync(tempFilePath)) await fs.unlinkSync(tempFilePath);
   });
 

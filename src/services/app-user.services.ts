@@ -1,8 +1,10 @@
 // import twilio from 'twilio';
+import { InferCreationAttributes, Transaction } from 'sequelize';
 import { AppUserRepository } from '../db/rdb/repositories/app-user.repository';
 // import { UserMongoRepository } from '../db/nosql/repository/user.repository';
-import { StoreAppUser, UpdateAppUser } from '../types/app.user.type';
+import { StoreAppUser, StoreAppUserData, UpdateAppUser } from '../types/app.user.type';
 import { generateId } from '../utils/id.utils';
+import { AppUserModel } from '../db/rdb/models';
 // import { ValidationException } from '../errors/ValidationException.error';
 // import { getEnvVar } from '../utils/common.utils';
 // import { CustomException } from '../errors/CustomException.error';
@@ -66,13 +68,17 @@ export class AppUserService {
   //   return await this.appUserRepo.getUserProfile(id);
   // }
 
-  async storeAppUser(data: StoreAppUser) {
+  async storeAppUser(data: StoreAppUserData, transaction?: Transaction) {
     const id = generateId()
-    return await this.appUserRepo.storeAppUser({ id, ...data});
+    return await this.appUserRepo.storeAppUser({ id, ...data }, transaction);
   }
 
-  async updateAppUser(data: UpdateAppUser, id: string) {
-    return await this.appUserRepo.updateAppUser(data, id);
+  async updateAppUser(data: UpdateAppUser, id: string, transaction?: Transaction) {
+    return await this.appUserRepo.updateAppUser(data, id, transaction);
+  }
+
+  async deleteAppUser(id: string, deletedBy: string, transaction?: Transaction) {
+    return await this.appUserRepo.deleteAppUser(id, deletedBy, transaction);
   }
 
   // async updateUsername(data: UpdateAppUser, id: string) {

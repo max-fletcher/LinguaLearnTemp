@@ -1,6 +1,6 @@
 import express from 'express';
 import { JwtMiddleware } from '../../middleware/jwt.middleware';
-import { createAppUser, getAllAppUsers, updateAppUser } from '../../controllers/admin/app-user.controller';
+import { createAppUser, deleteAppUser, getAllAppUsers, updateAppUser } from '../../controllers/admin/app-user.controller';
 import { validateRequestBody } from '../../utils/validatiion.utils';
 import { createAppUserSchema, updateAppUserSchema } from '../../schema/app-user.schema';
 import { multipleFileLocalUploader } from '../../middleware/fileUploadLocal.middleware';
@@ -117,11 +117,20 @@ adminUserRouter.post(
   createAppUser,
 );
 adminUserRouter.patch(
-  '/users',
+  '/users/:id',
   jwtMiddleware.verifyToken,
+  multipleFileLocalUploader(
+    [
+      { name: 'avatarUrl', maxCount: 1 },
+    ],
+    'users',
+    1048576, // 5 MB
+  ),
   validateRequestBody(updateAppUserSchema),
   updateAppUser,
 );
+
+adminUserRouter.delete('/users/:id', jwtMiddleware.verifyToken, deleteAppUser);
 
 // adminUserRouter.get('/courses', jwtMiddleware.verifyToken, getAllCourses);
 

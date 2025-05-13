@@ -11,7 +11,7 @@ import { capitalizeFirstLetter } from '../../utils/string.utils';
 import { mapAppUserGenerateToken } from '../../mapper/user.mapper';
 import { roundTo2DP } from '../../utils/number.utils';
 import { formatAppUserProfile } from '../../formatter/app-user.formatter';
-import { AppUserService } from '../../services/user.services';
+import { AppUserService } from '../../services/app-user.services';
 
 const jwtMiddleware = new JwtMiddleware();
 const authService = new AuthService();

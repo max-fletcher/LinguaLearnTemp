@@ -5,8 +5,6 @@ import { NextFunction, Request, Response } from 'express';
 
 export const validateRequestBody =
   (schema: z.ZodSchema) => async (req: Request, res: Response, next: NextFunction) => {
-
-    console.log('files', req.files);
     try {
       await schema.parseAsync({
         ...req.body,
@@ -15,7 +13,7 @@ export const validateRequestBody =
       });
       next();
     } catch (error: any) {
-      console.log('validateRequestBody', validateRequestBody);
+      // console.log('validateRequestBody', validateRequestBody);
       // rollbackMultipleFileS3(req);
       rollbackMultipleFileLocalUpload(req);
       if (error instanceof z.ZodError) {
