@@ -8,10 +8,7 @@ import {
 import { datetimeYMDHis } from '../../../utils/datetime.utils';
 export class AppUserRepository {
   constructor() {}
-  async createUser(
-    user: User,
-    transaction: Transaction,
-  ): Promise<User> {
+  async createUser(user: User, transaction: Transaction): Promise<User> {
       const createdUser = await AppUserModel.create(user, {
         transaction: transaction,
       });
@@ -145,6 +142,17 @@ export class AppUserRepository {
   //   )) as unknown as User;
   // }
 
+  async getAllAppUsers(): Promise<User[]> {
+    return (await AppUserModel.findAll({
+      where: {
+        deletedAt: {
+          [Op.eq]: null
+        }
+      },
+      order: [['createdAt', 'DESC']],
+    })) as unknown as User[];
+  }
+
   async storeAppUser(data: StoreAppUser, transaction?: Transaction): Promise<User> {
     const options: any = {};
 
@@ -183,12 +191,6 @@ export class AppUserRepository {
         id: id,
       },
     })) as unknown as User;
-  }
-
-  async getAllAppUsers(): Promise<User[]> {
-    return (await AppUserModel.findAll({
-      order: [['createdAt', 'DESC']],
-    })) as unknown as User[];
   }
 
   async getAllAppUsersWithOptions(select: string[]|null = null): Promise<User[]> {

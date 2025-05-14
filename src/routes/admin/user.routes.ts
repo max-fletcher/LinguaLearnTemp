@@ -1,6 +1,6 @@
 import express from 'express';
 import { JwtMiddleware } from '../../middleware/jwt.middleware';
-import { createAppUser, deleteAppUser, getAllAppUsers, updateAppUser } from '../../controllers/admin/app-user.controller';
+import { createAppUser, deleteAppUser, getAllAppUsers, getSingleAllAppUser, updateAppUser } from '../../controllers/admin/app-user.controller';
 import { validateRequestBody } from '../../utils/validatiion.utils';
 import { createAppUserSchema, updateAppUserSchema } from '../../schema/app-user.schema';
 import { multipleFileLocalUploader } from '../../middleware/fileUploadLocal.middleware';
@@ -103,6 +103,7 @@ const jwtMiddleware = new JwtMiddleware();
 // );
 
 adminUserRouter.get('/users', jwtMiddleware.verifyToken, getAllAppUsers);
+adminUserRouter.get('/users/:id', jwtMiddleware.verifyToken, getSingleAllAppUser);
 adminUserRouter.post(
   '/users',
   jwtMiddleware.verifyToken,

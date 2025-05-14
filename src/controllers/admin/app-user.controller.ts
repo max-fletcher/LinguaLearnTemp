@@ -10,18 +10,71 @@ const appUserService = new AppUserService();
 
 export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Response) {
   try {
-    const response = await appUserService.getAllAppUsers();
+    const users = await appUserService.getAllAppUsers();
 
     return res.status(200).json({
       data: {
         message: 'User list fetched successfully!',
-        user: response,
+        users: users,
       },
       status_code: 200,
     });
   } catch (error) {
-    
-    throw new CustomException('Bad Request', 400);
+    console.log('getAllAppUsers', error)
+    rollbackMultipleFileLocalUpload(req)
+    if (error instanceof CustomException) {
+      return res.status(error.statusCode).json({
+        error: {
+          message: error.message,
+        },
+        code: error.statusCode,
+      });
+    }
+
+    return res.status(500).json({
+      error: {
+        message: 'Something went wrong! Please try again.',
+      },
+      code: 500,
+    });
+  }
+}
+
+export async function getSingleAllAppUser(req: AdminAuthenticatedRequest, res: Response) {
+  try {
+    const appUserId = req.params.id
+    const user = await appUserService.findUserById(appUserId);
+
+    if(!user)
+      throw new NotFoundException('User not found.')
+    if(user.deletedAt)
+      throw new NotFoundException('User not found.')
+
+    return res.status(200).json({
+      data: {
+        message: 'User fetched successfully!',
+        user: user,
+      },
+      status_code: 200,
+    });
+  } catch (error) {
+    console.log('getSingleAllAppUser', error)
+    rollbackMultipleFileLocalUpload(req)
+    if (error instanceof CustomException) {
+      return res.status(error.statusCode).json({
+        error: {
+          message: error.message,
+        },
+        code: error.statusCode,
+      });
+    }
+
+    return res.status(500).json({
+      error: {
+        message: 'Something went wrong! Please try again.',
+      },
+      code: 500,
+    });
   }
 }
 
@@ -75,7 +128,6 @@ export async function createAppUser(req: AdminAuthenticatedRequest, res: Respons
 export async function updateAppUser(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const appUserId = req.params.id
-
     const user = await appUserService.findUserById(appUserId, ['id', 'avatarUrl', 'deletedAt'])
     if(!user)
       throw new NotFoundException('User not found.')

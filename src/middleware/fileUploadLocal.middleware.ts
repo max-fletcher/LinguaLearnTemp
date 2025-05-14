@@ -75,7 +75,7 @@ export const multipleFileLocalUploader = (
 };
 
 export const rollbackMultipleFileLocalUpload = async (req: Request) => {
-  if (!Object.keys(req.files!).length) return;
+  if (!req.files || !Object.keys(req.files).length) return;
 
   // IF EXISTS/NOT EMPTY CHECK
   Object.values(req.files!).forEach(async (fields: fieldsType[]) => {
