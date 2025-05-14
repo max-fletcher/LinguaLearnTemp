@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import path from 'path';
 import { CustomException } from '../errors/CustomException.error';
 import { FirebaseNotificationRepository } from '../db/rdb/repositories/firebase-notification.repository';
-import { AnyStringKeyValuePair } from '../types/app.user.type';
+import { AnyStringKeyValuePair } from '../types/app-user.type';
 import { AppUserRepository } from '../db/rdb/repositories/app-user.repository';
 import FirebaseNotificationsModel from '../db/rdb/models/firebase-notifications';
 import { generateFCMTokenId } from '../utils/id.utils';

@@ -1,12 +1,11 @@
-import { AdminUserModel } from '../../db/rdb/models';
-import { AdminUserRepository } from '../../db/rdb/repositories/admin-user.repository'
+import { AdminUserRepository } from '../../db/rdb/repositories/admin-user.repository';
 import { CustomException } from '../../errors/CustomException.error';
 import { UserPayload } from '../../schema/token-payload.schema';
 import {
   CreateAdminUserSchema,
   UpdateAdminUserSchema,
 } from '../../schema/user.schema';
-import { AdminUser, UserBalanceType } from '../../types/common-models.type';
+import { AdminUser, UserBalanceType } from '../../types/common.type';
 import {
   createAdminUserId,
   createUserBalanceId,
@@ -18,14 +17,16 @@ import { EmailService } from '../email.service';
 
 export class AdminUserService {
   private adminUserRepo: AdminUserRepository;
+  private userBalanceRepo: UserBalanceRepository;
   private emailService: EmailService;
 
   constructor() {
     this.adminUserRepo = new AdminUserRepository();
+    this.userBalanceRepo = new UserBalanceRepository();
     this.emailService = new EmailService();
   }
 
-  async getAllAppUsers(userType: string) {
+  async getAllAdminUsers(userType: string) {
     const users = await this.adminUserRepo.getAdminUsers(userType);
 
     return users;

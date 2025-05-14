@@ -6,6 +6,15 @@ import { CourseModel } from './course.model';
 import { DayModel } from './days.model';
 
 // ADMIN USER ASSOCIATIONS
+AdminUserModel.hasMany(AppUserModel, {
+  as: 'deleted_app_user',
+  foreignKey: 'deletedBy',
+});
+AppUserModel.belongsTo(AdminUserModel, {
+  as: 'deleted_by',
+  foreignKey: 'deletedBy',
+});
+
 AdminUserModel.hasMany(CourseModel, {
   as: 'courses',
   foreignKey: 'updatedBy',
@@ -22,15 +31,6 @@ CourseModel.hasMany(DayModel, {
 DayModel.belongsTo(CourseModel, {
   as: 'course',
   foreignKey: 'courseId',
-});
-
-AdminUserModel.hasMany(AppUserModel, {
-  as: 'deleted_app_user',
-  foreignKey: 'deletedBy',
-});
-AppUserModel.belongsTo(AdminUserModel, {
-  as: 'deleted_by',
-  foreignKey: 'deletedBy',
 });
 
 export {

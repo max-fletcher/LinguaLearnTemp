@@ -1,4 +1,4 @@
-import { UserTierStatusType } from '../types/common-models.type';
+import { UserTierStatusType } from '../types/common.type';
 
 export function mapUserTierStatusModel(
   id: string,

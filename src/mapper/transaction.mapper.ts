@@ -1,5 +1,5 @@
 import { TransactionPaymentMethodTypes } from '../constants/enums';
-import { TransactionType } from '../types/common-models.type';
+import { TransactionType } from '../types/common.type';
 
 export function mapToTransactionModel(
   id: string,

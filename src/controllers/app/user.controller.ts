@@ -1,6 +1,6 @@
 import { AppAuthenticatedRequest } from '../../types/authenticate.type';
 import { UnauthorizedException } from '../../errors/UnauthorizedException.error';
-import { AppUserService } from '../../services/app-user.services';
+import { AppUserService } from '../../services/admin/app-user.services';
 import { Request, Response } from 'express';
 import { formatAppUserProfile } from '../../formatter/app-user.formatter';
 import { CustomException } from '../../errors/CustomException.error';

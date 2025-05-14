@@ -1,4 +1,4 @@
-import { CashBalanceHistoryType } from '../types/common-models.type';
+import { CashBalanceHistoryType } from '../types/common.type';
 
 export function mapToCashBalanceHistoryModel(
   id: string,

@@ -1,4 +1,4 @@
-import { UserMongo } from '../../../types/app.user.type';
+import { UserMongo } from '../../../types/app-user.type';
 import AppUserModel from '../model/user.model';
 
 export class UserMongoRepository {

@@ -7,10 +7,11 @@ import path from 'path';
 import { corsOptions } from './config/cors.config';
 import { globalLimiterOptions } from './config/globalRateLimiter.config';
 import { JwtMiddleware } from './middleware/jwt.middleware';
-import { adminUserRouter } from './routes/admin/user.routes';
-import { appAuthRouter } from './routes/app/auth.routes';
+import { appUserRouter } from './routes/admin/app-user.routes';
+// import { appAuthRouter } from './routes/app/auth.routes';
 import { testRouter } from './routes/test.routes';
 import { adminAuthRouter } from './routes/admin/auth.routes';
+import { CourseRouter } from './routes/admin/course.routes';
 
 // const numCPUs = os.cpus().length
 
@@ -45,7 +46,8 @@ const server = () => {
     app.use('/api/v1/test', testRouter);
     // admin routes
     app.use('/api/v1/admin/auth', adminAuthRouter);
-    app.use('/api/v1/admin', jwtMiddleware.verifyToken, adminUserRouter);
+    app.use('/api/v1/admin/app-users', jwtMiddleware.verifyToken, appUserRouter);
+    app.use('/api/v1/admin/course', jwtMiddleware.verifyToken, CourseRouter);
     // // app routes
     // app.use('/api/v1/app/auth', appAuthRouter);
 

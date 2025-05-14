@@ -16,12 +16,12 @@ class CourseModel extends Model<
   declare id: string
   declare title: string
   declare description: string | null
-  declare totalDays: string
+  declare totalDays: number
   declare language: string
   declare targetLanguage: string
   declare difficulty: string
   declare imagePath: string
-  declare estimatedHours: string
+  declare estimatedHours: number
   declare updatedBy: string
   declare deletedAt: string | null
   declare deletedBy: string | null
@@ -62,8 +62,8 @@ CourseModel.init(
         Languages.FRENCH,
         Languages.SPANISH
       ),
-      defaultValue: Languages.ENGLISH,
       allowNull: false,
+      defaultValue: Languages.ENGLISH,
     },
     difficulty: {
       type: DataTypes.ENUM(
@@ -71,8 +71,8 @@ CourseModel.init(
         Difficulty.INTERMEDIATE,
         Difficulty.ADVANCED,
       ),
-      defaultValue: Difficulty.BEGINNER,
       allowNull: false,
+      defaultValue: Difficulty.BEGINNER,
     },
     imagePath: {
       type: DataTypes.STRING,

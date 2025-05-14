@@ -1,5 +1,5 @@
 import { AppUserNotificationOptions } from '../constants/enums';
-import { UserProfileResponse } from '../types/app.user.type';
+import { UserProfileResponse } from '../types/app-user.type';
 import { TActiveTiersStatusesWithTiers } from '../types/tier.type';
 import { roundTo2DP } from '../utils/number.utils';
 

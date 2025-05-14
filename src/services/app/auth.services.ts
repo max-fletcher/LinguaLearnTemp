@@ -8,7 +8,7 @@ import {
 import {
   UpdateAppUser,
   UserWithTimeStamps,
-} from '../../types/app.user.type';
+} from '../../types/app-user.type';
 import fs from 'fs';
 import admin from 'firebase-admin';
 import twilio from 'twilio';

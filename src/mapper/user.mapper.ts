@@ -4,7 +4,7 @@ import {
   UserWithTimeStamps,
   // UserProviders,
   AppUserGenerateToken,
-} from '../types/app.user.type';
+} from '../types/app-user.type';
 import { 
   AppUserStatus, 
   // RegistrationMethod

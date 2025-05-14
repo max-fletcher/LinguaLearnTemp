@@ -1,4 +1,4 @@
-import { UserBalanceType } from '../types/common-models.type';
+import { UserBalanceType } from '../types/common.type';
 
 export function mapToUserBalanceModel(
   id: string,

@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { CustomException } from '../../errors/CustomException.error';
 import { AdminAuthenticatedRequest } from '../../types/authenticate.type';
-import { AppUserService } from '../../services/app-user.services';
+import { AppUserService } from '../../services/admin/app-user.services';
 import { deleteMultipleFileLocal, multipleFileLocalFullPathResolver, rollbackMultipleFileLocalUpload } from '../../middleware/fileUploadLocal.middleware';
 import { BadRequestException } from '../../errors/BadRequestException.error';
 import { NotFoundException } from '../../errors/NotFoundException.error';
@@ -40,7 +40,7 @@ export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Respon
   }
 }
 
-export async function getSingleAllAppUser(req: AdminAuthenticatedRequest, res: Response) {
+export async function getSingleAppUser(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const appUserId = req.params.id
     const user = await appUserService.findUserById(appUserId);
