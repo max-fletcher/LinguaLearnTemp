@@ -43,7 +43,7 @@ export const createAppUserSchema = z.object({
     .optional()
     .nullable(),
   avatarUrl: z.array(imageValidationRule).optional().nullable(),
-  });
+});
 
 export const updateAppUserSchema = z.object({
   phoneNumber: z

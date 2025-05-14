@@ -12,8 +12,12 @@ export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Respon
   try {
     const response = await appUserService.getAllAppUsers();
 
-    return res.send({
-      users: response,
+    return res.status(200).json({
+      data: {
+        message: 'User list fetched successfully!',
+        user: response,
+      },
+      status_code: 200,
     });
   } catch (error) {
     
@@ -85,7 +89,7 @@ export async function updateAppUser(req: AdminAuthenticatedRequest, res: Respons
     }
 
     if(req.body.email){
-      const emailExists = await appUserService.userExistsByEmail(req.body.email)
+      const emailExists = await appUserService.userExistsByEmail(req.body.email, appUserId)
       if(emailExists)
         throw new BadRequestException('Email already taken.')
     }
@@ -153,7 +157,6 @@ export async function deleteAppUser(req: AdminAuthenticatedRequest, res: Respons
       return res.json({
         data: {
           message: 'User deleted successfully!',
-          user: user,
         },
         status_code: 200,
       });

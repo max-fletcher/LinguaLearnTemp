@@ -40,7 +40,7 @@ AppUserModel.init(
     },
     phoneNumber: {
       type: DataTypes.STRING,
-      unique: true,
+      // unique: true, // Not needed since we are using soft-deletes
       allowNull: false,
     },
     firstName: {
@@ -53,6 +53,7 @@ AppUserModel.init(
     },
     email: {
       type: DataTypes.STRING,
+      // unique: true, // Not needed since we are using soft-deletes
       allowNull: true,
     },
     streak: {
