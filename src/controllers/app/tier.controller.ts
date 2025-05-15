@@ -52,7 +52,7 @@ export async function getAllTiers(req: AppAuthenticatedRequest, res: Response) {
         tiers: allTiers,
         mostPopular: mostPopular
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     if (e instanceof CustomException) {
@@ -60,7 +60,7 @@ export async function getAllTiers(req: AppAuthenticatedRequest, res: Response) {
         error: {
           message: e.message,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -68,7 +68,7 @@ export async function getAllTiers(req: AppAuthenticatedRequest, res: Response) {
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      status_code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -99,7 +99,7 @@ export async function getSingleTierById(
       data: {
         tier: tier,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     if (e instanceof CustomException) {
@@ -107,7 +107,7 @@ export async function getSingleTierById(
         error: {
           message: e.message,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -115,7 +115,7 @@ export async function getSingleTierById(
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      status_code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -138,7 +138,7 @@ export async function getUserActiveTiers(
         user_cash_balance: appUserBalance.coin_balance,
         user_tiers: userTiers,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     if (e instanceof CustomException) {
@@ -146,7 +146,7 @@ export async function getUserActiveTiers(
         error: {
           message: e.message,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -154,7 +154,7 @@ export async function getUserActiveTiers(
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      status_code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -211,7 +211,7 @@ export async function purchaseTier(
         message: 'Tier purchased successfully!',
         tier: tier
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     console.log('purchaseTier error', e);
@@ -221,7 +221,7 @@ export async function purchaseTier(
         error: {
           message: e.errors[0].detail,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -230,7 +230,7 @@ export async function purchaseTier(
         error: {
           message: e.message,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -238,7 +238,7 @@ export async function purchaseTier(
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      status_code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -265,7 +265,7 @@ export async function purchaseTier(
 //         message: 'Checkout generated.',
 //         stripe_session: session
 //       },
-//       status_code: 200
+//       statusCode: 200
 //     });
 //   } catch (e) {
 //     if (e instanceof CustomException) {
@@ -275,7 +275,7 @@ export async function purchaseTier(
 //           error:{
 //             message: e.message
 //           },
-//           status_code: e.statusCode 
+//           statusCode: e.statusCode 
 //         });
 //     }
 
@@ -285,7 +285,7 @@ export async function purchaseTier(
 //         error:{
 //           message: 'Something went wrong! Please try again.',
 //         },
-//         status_code: 500 
+//         statusCode: 500 
 //       });
 //   }
 // }
@@ -308,7 +308,7 @@ export async function getPackagePageData(
       data: {
         package_page_data: formattedPackagePageData,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     if (e instanceof CustomException) {
@@ -316,7 +316,7 @@ export async function getPackagePageData(
         error: {
           message: e.message,
         },
-        status_code: e.statusCode,
+        statusCode: e.statusCode,
       });
     }
 
@@ -324,7 +324,7 @@ export async function getPackagePageData(
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      status_code: 500,
+      statusCode: 500,
     });
   }
 }

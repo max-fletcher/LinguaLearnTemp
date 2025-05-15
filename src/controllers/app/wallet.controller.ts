@@ -132,7 +132,7 @@ export async function getUserWalletInfScroll(
             : 0,
         sc_transactions: formattedTransactions,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     // console.log(e);
@@ -269,7 +269,7 @@ export async function getUserWalletInfScrollDesktop(
             : 0,
         sc_transactions: formattedTransactions,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     // console.log(e);

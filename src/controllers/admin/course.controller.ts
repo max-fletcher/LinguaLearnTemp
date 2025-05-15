@@ -3,7 +3,6 @@ import { CustomException } from '../../errors/CustomException.error';
 import { AdminAuthenticatedRequest } from '../../types/authenticate.type';
 import { CourseService } from '../../services/admin/course.services';
 import { deleteMultipleFileLocal, multipleFileLocalFullPathResolver, rollbackMultipleFileLocalUpload } from '../../middleware/fileUploadLocal.middleware';
-import { BadRequestException } from '../../errors/BadRequestException.error';
 import { NotFoundException } from '../../errors/NotFoundException.error';
 
 const courseService = new CourseService();
@@ -17,7 +16,7 @@ export async function getAllCourses(req: AdminAuthenticatedRequest, res: Respons
         message: 'Course list fetched successfully!',
         courses: courses,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (error) {
     console.log('getAllCourses', error)
@@ -27,7 +26,7 @@ export async function getAllCourses(req: AdminAuthenticatedRequest, res: Respons
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -35,7 +34,7 @@ export async function getAllCourses(req: AdminAuthenticatedRequest, res: Respons
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -55,7 +54,7 @@ export async function getSingleCourse(req: AdminAuthenticatedRequest, res: Respo
         message: 'Course fetched successfully!',
         course: course,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (error) {
     console.log('getSingleAllCourse', error)
@@ -65,7 +64,7 @@ export async function getSingleCourse(req: AdminAuthenticatedRequest, res: Respo
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -73,7 +72,7 @@ export async function getSingleCourse(req: AdminAuthenticatedRequest, res: Respo
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -90,7 +89,7 @@ export async function createCourse(req: AdminAuthenticatedRequest, res: Response
           message: 'Course created successfully!',
           course: response,
         },
-        status_code: 201,
+        statusCode: 201,
       });
 
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -102,7 +101,7 @@ export async function createCourse(req: AdminAuthenticatedRequest, res: Response
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -110,7 +109,7 @@ export async function createCourse(req: AdminAuthenticatedRequest, res: Response
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -143,7 +142,7 @@ export async function updateCourse(req: AdminAuthenticatedRequest, res: Response
           message: 'Course updated successfully!',
           course: course,
         },
-        status_code: 200,
+        statusCode: 200,
       });
     }
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -155,7 +154,7 @@ export async function updateCourse(req: AdminAuthenticatedRequest, res: Response
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -163,7 +162,7 @@ export async function updateCourse(req: AdminAuthenticatedRequest, res: Response
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -188,7 +187,7 @@ export async function deleteCourse(req: AdminAuthenticatedRequest, res: Response
         data: {
           message: 'Course deleted successfully!',
         },
-        status_code: 200,
+        statusCode: 200,
       });
     }
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -199,7 +198,7 @@ export async function deleteCourse(req: AdminAuthenticatedRequest, res: Response
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -207,7 +206,7 @@ export async function deleteCourse(req: AdminAuthenticatedRequest, res: Response
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }

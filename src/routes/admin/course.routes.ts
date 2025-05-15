@@ -17,7 +17,7 @@ CourseRouter.post(
     [
       { name: 'imagePath', maxCount: 1 },
     ],
-    'course',
+    'courses',
     1048576, // 5 MB
   ),
   validateRequestBody(createCourseSchema),
@@ -30,7 +30,7 @@ CourseRouter.patch(
     [
       { name: 'imagePath', maxCount: 1 },
     ],
-    'course',
+    'courses',
     1048576, // 5 MB
   ),
   validateRequestBody(updateCourseSchema),

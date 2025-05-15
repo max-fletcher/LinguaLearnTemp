@@ -26,7 +26,7 @@ export async function login(req: Request, res: Response) {
         jwt: token,
         user: user,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (error) {
     console.log('admin login', error);

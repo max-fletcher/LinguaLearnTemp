@@ -17,7 +17,7 @@ export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Respon
         message: 'User list fetched successfully!',
         users: users,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (error) {
     console.log('getAllAppUsers', error)
@@ -27,7 +27,7 @@ export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Respon
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -35,7 +35,7 @@ export async function getAllAppUsers(req: AdminAuthenticatedRequest, res: Respon
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -55,7 +55,7 @@ export async function getSingleAppUser(req: AdminAuthenticatedRequest, res: Resp
         message: 'User fetched successfully!',
         user: user,
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (error) {
     console.log('getSingleAllAppUser', error)
@@ -65,7 +65,7 @@ export async function getSingleAppUser(req: AdminAuthenticatedRequest, res: Resp
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -73,7 +73,7 @@ export async function getSingleAppUser(req: AdminAuthenticatedRequest, res: Resp
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -100,7 +100,7 @@ export async function createAppUser(req: AdminAuthenticatedRequest, res: Respons
           message: 'User created successfully!',
           user: response,
         },
-        status_code: 201,
+        statusCode: 201,
       });
 
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -112,7 +112,7 @@ export async function createAppUser(req: AdminAuthenticatedRequest, res: Respons
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -120,7 +120,7 @@ export async function createAppUser(req: AdminAuthenticatedRequest, res: Respons
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -165,7 +165,7 @@ export async function updateAppUser(req: AdminAuthenticatedRequest, res: Respons
           message: 'User updated successfully!',
           user: user,
         },
-        status_code: 200,
+        statusCode: 200,
       });
     }
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -177,7 +177,7 @@ export async function updateAppUser(req: AdminAuthenticatedRequest, res: Respons
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -185,7 +185,7 @@ export async function updateAppUser(req: AdminAuthenticatedRequest, res: Respons
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }
@@ -210,7 +210,7 @@ export async function deleteAppUser(req: AdminAuthenticatedRequest, res: Respons
         data: {
           message: 'User deleted successfully!',
         },
-        status_code: 200,
+        statusCode: 200,
       });
     }
     throw new CustomException('Something went wrong! Please try again.', 500)
@@ -221,7 +221,7 @@ export async function deleteAppUser(req: AdminAuthenticatedRequest, res: Respons
         error: {
           message: error.message,
         },
-        code: error.statusCode,
+        statusCode: error.statusCode,
       });
     }
 
@@ -229,7 +229,7 @@ export async function deleteAppUser(req: AdminAuthenticatedRequest, res: Respons
       error: {
         message: 'Something went wrong! Please try again.',
       },
-      code: 500,
+      statusCode: 500,
     });
   }
 }

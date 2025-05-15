@@ -8,3 +8,15 @@ nativeLanguage: English
 learningGoal: Speak english nigga
 avatarUrl: FILE
 
+------------------------------------
+
+Course Create/Update:
+
+phoneNumber: +8801762214316
+firstName: new
+lastName: user 2
+email: newuser2@mail.com
+nativeLanguage: English
+learningGoal: Speak english nigga
+
+-------------------------------------

@@ -120,7 +120,7 @@ export async function usernameExists(
       data: {
         message: 'This username is available.',
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     if (e instanceof CustomException) {
@@ -150,7 +150,7 @@ export async function sendOTP(req: Request, res: Response) {
         data: {
           message: 'OTP resent. Check your messages.',
         },
-        status_code: 200,
+        statusCode: 200,
       });
     }
   } catch (e) {
@@ -246,7 +246,7 @@ export async function verifyOTP(req: AppAuthenticatedRequest, res: Response) {
         data: {
           message: 'OTP verified. You may proceed.',
         },
-        status_code: 200,
+        statusCode: 200,
       });
 
     if (typeof verified === 'boolean' && !verified)
@@ -329,7 +329,7 @@ export async function resendOTP(req: AppAuthenticatedRequest, res: Response) {
         data: {
           message: 'OTP resent. Check your messages.',
         },
-        status_code: 200,
+        statusCode: 200,
       });
   } catch (e: any) {
     if (e.constructor.name === 'RestException') {
@@ -385,7 +385,7 @@ export async function sendOTPToWhatsappOrEmail(
         data: {
           message: 'OTP sent. Check your messages.',
         },
-        status_code: 200,
+        statusCode: 200,
       });
   } catch (e: any) {
     if (e.constructor.name === 'RestException') {
@@ -538,6 +538,6 @@ export async function checkAuthenticationStatus(req: Request, res: Response) {
     data: {
       message: 'User authenticated.',
     },
-    status_code: 200,
+    statusCode: 200,
   });
 }

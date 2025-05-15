@@ -617,7 +617,7 @@ export async function updateNotificationStatus(
       data: {
         message: 'Notification status changed successfully.',
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     // console.log(e);
@@ -664,7 +664,7 @@ export async function initiateAccountWipeout(req: AppAuthenticatedRequest, res: 
           message: `OTP sent to your ${channel === 'phone' ? 'phone/whatsapp' : channel }. Check your messages.`,
           channel: channel
         },
-        status_code: 200,
+        statusCode: 200,
       });
 
     throw new NotFoundException('Phone number, email and whatsapp number missing !');
@@ -741,7 +741,7 @@ export async function verifyOTPForDeleteAppUser(req: AppAuthenticatedRequest, re
       data: {
         message: 'OTP verified. You may proceed.',
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e: any) {
     if (e.constructor.name === 'RestException') {
@@ -791,7 +791,7 @@ export async function confirmAccountWipeout(req: AppAuthenticatedRequest, res: R
         message: `Your account information will be deleted shortly.`,
         deletedAt: runAt
       },
-      status_code: 200,
+      statusCode: 200,
     });
   } catch (e) {
     // console.log(e);

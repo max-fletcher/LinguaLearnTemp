@@ -47,7 +47,7 @@ const server = () => {
     // admin routes
     app.use('/api/v1/admin/auth', adminAuthRouter);
     app.use('/api/v1/admin/app-users', jwtMiddleware.verifyToken, appUserRouter);
-    app.use('/api/v1/admin/course', jwtMiddleware.verifyToken, CourseRouter);
+    app.use('/api/v1/admin/courses', jwtMiddleware.verifyToken, CourseRouter);
     // // app routes
     // app.use('/api/v1/app/auth', appAuthRouter);
 
