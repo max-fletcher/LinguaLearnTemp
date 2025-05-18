@@ -80,7 +80,7 @@ export async function getSingleCourse(req: AdminAuthenticatedRequest, res: Respo
 export async function createCourse(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const filesWithFullPaths = multipleFileLocalFullPathResolver(req)
-    const data = { ...req.body, isNewCourse: true, avatarUrl: filesWithFullPaths?.avatarUrl[0], updatedBy: req.user!.id }
+    const data = { ...req.body, imagePath: filesWithFullPaths?.imagePath[0], updatedBy: req.user!.id }
     const response = await courseService.storeCourse(data);
 
     if(response)
@@ -117,7 +117,7 @@ export async function createCourse(req: AdminAuthenticatedRequest, res: Response
 export async function updateCourse(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const courseId = req.params.id
-    const course = await courseService.findCourseById(courseId, ['id', 'avatarUrl', 'deletedAt'])
+    const course = await courseService.findCourseById(courseId, ['id', 'imagePath', 'deletedAt'])
     if(!course)
       throw new NotFoundException('Course not found.')
     if(course.deletedAt)
@@ -125,12 +125,12 @@ export async function updateCourse(req: AdminAuthenticatedRequest, res: Response
 
     let data = { ...req.body, updatedBy: req.user!.id }
 
-    if(req.files?.avatarUrl && req.files?.avatarUrl.length > 0){
+    if(req.files?.imagePath && req.files?.imagePath.length > 0){
       if(course.imagePath)
         deleteMultipleFileLocal(req, [course.imagePath])
 
       const filesWithFullPaths = multipleFileLocalFullPathResolver(req)
-      data = { ...data, avatarUrl: filesWithFullPaths?.avatarUrl[0] }
+      data = { ...data, imagePath: filesWithFullPaths?.imagePath[0] }
     }
 
     const response = await courseService.updateCourse(data, courseId);
@@ -192,7 +192,7 @@ export async function deleteCourse(req: AdminAuthenticatedRequest, res: Response
     }
     throw new CustomException('Something went wrong! Please try again.', 500)
   } catch (error) {
-    console.log('updateCourse', error);
+    console.log('deleteCourse', error);
     if (error instanceof CustomException) {
       return res.status(error.statusCode).json({
         error: {

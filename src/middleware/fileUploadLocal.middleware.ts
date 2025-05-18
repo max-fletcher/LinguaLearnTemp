@@ -123,7 +123,7 @@ export const deleteMultipleFileLocal = async (
 };
 
 export const multipleFileLocalFullPathResolver = (req: Request) => {
-  if (!Object.keys(req.files!).length) return;
+  if (!req.files || !Object.keys(req.files).length) return;
 
   const formatted_paths: formattedPathsType = {};
 
