@@ -37,5 +37,6 @@ export {
   AppUserModel,
   AdminUserModel,
   UserOTPModel,
-  CourseModel
+  CourseModel,
+  DayModel
 };
