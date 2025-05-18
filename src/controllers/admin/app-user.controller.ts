@@ -91,7 +91,7 @@ export async function createAppUser(req: AdminAuthenticatedRequest, res: Respons
     }
 
     const filesWithFullPaths = multipleFileLocalFullPathResolver(req)
-    const data = { ...req.body, isNewUser: true, avatarUrl: filesWithFullPaths?.avatarUrl[0], updatedBy: req.user!.id }
+    const data = { ...req.body, isNewUser: true, avatarUrl: filesWithFullPaths?.avatarUrl[0] }
     const response = await appUserService.storeAppUser(data);
 
     if(response)
@@ -146,7 +146,7 @@ export async function updateAppUser(req: AdminAuthenticatedRequest, res: Respons
         throw new BadRequestException('Email already taken.')
     }
 
-    let data = { ...req.body, updatedBy: req.user!.id }
+    let data = { ...req.body }
 
     if(req.files?.avatarUrl && req.files?.avatarUrl.length > 0){
       if(user.avatarUrl)

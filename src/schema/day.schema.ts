@@ -7,7 +7,7 @@ const courseService = new CourseService()
 
 export const createDaySchema = z.object({
   courseId: z
-    .string({ required_error: 'CourseId is required.' })
+    .string({ required_error: 'Course id is required.' })
     .trim(),
   dayNumber: z
     .coerce
@@ -69,7 +69,7 @@ export const updateDaySchema = z.object({
     .string({ required_error: 'Id is required.' })
     .trim(),
   courseId: z
-    .string({ required_error: 'CourseId is required.' })
+    .string({ required_error: 'Course id is required.' })
     .trim()
     .optional()
     .nullable(),

@@ -27,7 +27,6 @@ class AppUserModel extends Model<
   declare isNewUser: boolean
   declare lastLoginAt: string
   declare verified: string
-  declare updatedBy: string
   declare deletedAt: string | null
   declare deletedBy: string | null
 }
@@ -99,10 +98,6 @@ AppUserModel.init(
         AppUserVerificationStatus.BANNED,
       ),
       defaultValue: AppUserVerificationStatus.UNVERIFIED,
-    },
-    updatedBy: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
     deletedAt: {
       type: DataTypes.DATE,

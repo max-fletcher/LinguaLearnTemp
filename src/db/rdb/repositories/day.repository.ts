@@ -1,10 +1,10 @@
 import { Op, Transaction } from 'sequelize';
-import { DayModel } from '../models';
+import { DayModel, LessonModel } from '../models';
 import { Day, UpdateDayData, StoreDay } from '../../../types/day.type';
 import { datetimeYMDHis } from '../../../utils/datetime.utils';
 export class DayRepository {
   constructor() {}
-  async findDayById(id: string, select: string[]|null = null): Promise<Day> {
+  async findDayById(id: string, select: string[]|null = null, withRelations: boolean = false): Promise<Day> {
     const options: any = {
       where: {
         id: id,
@@ -14,8 +14,21 @@ export class DayRepository {
       },
     }
 
-    if(select){
+    if(select)
       options.attributes = select
+
+    if(withRelations){
+      options.include = [
+        {
+          as: 'lessons',
+          model: LessonModel,
+          where: {
+            deletedAt: {
+              [Op.eq]: null
+            }
+          }
+        },
+      ];
     }
 
     return (await DayModel.findOne(options)) as unknown as Day;

@@ -10,8 +10,8 @@ export class DayService {
     this.dayRepo = new DayRepository();
   }
 
-  async findDayById(id: string, select: string[]|null = null) {
-    return await this.dayRepo.findDayById(id, select);
+  async findDayById(id: string, select: string[]|null = null, withRelations: boolean = false) {
+    return await this.dayRepo.findDayById(id, select, withRelations);
   }
 
   async dayExistsById(id: string) {

@@ -43,7 +43,7 @@ export async function getAllDays(req: AdminAuthenticatedRequest, res: Response) 
 export async function getSingleDay(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const dayId = req.params.id
-    const day = await dayService.findDayById(dayId);
+    const day = await dayService.findDayById(dayId, null, true);
 
     if(!day)
       throw new NotFoundException('Day not found.')

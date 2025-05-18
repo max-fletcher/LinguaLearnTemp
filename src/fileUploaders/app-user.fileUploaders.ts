@@ -7,7 +7,7 @@ const appUserUploader = multipleFileLocalUploader(
     { name: 'avatarUrl', maxCount: 1 },
   ],
   'users',
-  1048576, // 5 MB
+  5242880, // 5 MB
 )
 
 export const appUserFileUploaderMiddleware = (req: Request, res: Response, next: NextFunction) => {

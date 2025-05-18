@@ -17,7 +17,7 @@ export class CourseRepository {
     if(select)
       options.attributes = select
 
-    if(withRelations)
+    if(withRelations){
       options.include = [
         {
           as: 'days',
@@ -29,6 +29,7 @@ export class CourseRepository {
           }
         },
       ];
+    }
 
     return (await CourseModel.findOne(options)) as unknown as Course;
   }

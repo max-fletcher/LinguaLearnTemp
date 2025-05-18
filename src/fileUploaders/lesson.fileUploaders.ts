@@ -2,16 +2,16 @@ import { NextFunction, Request, Response } from "express";
 import { multipleFileLocalUploader } from "../middleware/fileUploadLocal.middleware";
 import multer from "multer";
 
-const courseUploader = multipleFileLocalUploader(
+const lessonUploader = multipleFileLocalUploader(
   [
     { name: 'audioIntro', maxCount: 1 },
   ],
-  'courses',
+  'lessons',
   5242880, // 5 MB
 )
 
-export const courseFileUploaderMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  courseUploader(req, res, function (error) {
+export const lessonFileUploaderMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  lessonUploader(req, res, function (error) {
     if (error instanceof multer.MulterError) {
       return res.status(Number(error.code)).json({
         error: {
