@@ -13,7 +13,7 @@ export const validateRequestBody =
       });
       next();
     } catch (error: any) {
-      // console.log('validateRequestBody', validateRequestBody);
+      console.log('validateRequestBody', error);
       // rollbackMultipleFileS3(req);
       rollbackMultipleFileLocalUpload(req);
       if (error instanceof z.ZodError) {

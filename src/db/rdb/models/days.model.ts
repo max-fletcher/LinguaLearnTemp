@@ -31,10 +31,12 @@ DayModel.init(
     courseId: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: 'courseId_dayNumber_unique',
     },
     dayNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: 'courseId_dayNumber_unique',
     },
     title: {
       type: DataTypes.STRING,

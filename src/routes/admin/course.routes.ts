@@ -1,10 +1,10 @@
 import express from 'express';
 import { JwtMiddleware } from '../../middleware/jwt.middleware';
 import { validateRequestBody } from '../../utils/validatiion.utils';
-import { createCourseSchema, updateCourseSchema } from '../../schema/course.schema';
 
 import { createCourse, deleteCourse, getAllCourses, getSingleCourse, updateCourse } from '../../controllers/admin/course.controller';
 import { courseFileUploaderMiddleware } from '../../fileUploaders/course.fileUploaders';
+import { createCourseSchema, updateCourseSchema } from '../../schema/course.schema';
 
 const CourseRouter = express.Router();
 const jwtMiddleware = new JwtMiddleware();

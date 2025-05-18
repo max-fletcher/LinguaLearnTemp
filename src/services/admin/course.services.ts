@@ -10,8 +10,8 @@ export class CourseService {
     this.courseRepo = new CourseRepository();
   }
 
-  async findCourseById(id: string, select: string[]|null = null) {
-    return await this.courseRepo.findCourseById(id, select);
+  async findCourseById(id: string, select: string[]|null = null, withRelations: boolean = false) {
+    return await this.courseRepo.findCourseById(id, select, withRelations);
   }
 
   async courseExistsById(id: string) {

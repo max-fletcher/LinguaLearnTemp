@@ -42,7 +42,7 @@ export async function getAllCourses(req: AdminAuthenticatedRequest, res: Respons
 export async function getSingleCourse(req: AdminAuthenticatedRequest, res: Response) {
   try {
     const courseId = req.params.id
-    const course = await courseService.findCourseById(courseId);
+    const course = await courseService.findCourseById(courseId, null, true);
 
     if(!course)
       throw new NotFoundException('Course not found.')

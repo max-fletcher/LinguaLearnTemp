@@ -1,14 +1,10 @@
 import { Op, Transaction } from 'sequelize';
-import { CourseModel } from '../models';
-import {
-  Course,
-  UpdateCourseData,
-  StoreCourse,
-} from '../../../types/course.type';
+import { CourseModel, DayModel } from '../models';
+import { Course, UpdateCourseData, StoreCourse } from '../../../types/course.type';
 import { datetimeYMDHis } from '../../../utils/datetime.utils';
 export class CourseRepository {
   constructor() {}
-  async findCourseById(id: string, select: string[]|null = null): Promise<Course> {
+  async findCourseById(id: string, select: string[]|null = null, withRelations: boolean = false): Promise<Course> {
     const options: any = {
       where: {
         id: id,
@@ -18,9 +14,21 @@ export class CourseRepository {
       },
     }
 
-    if(select){
+    if(select)
       options.attributes = select
-    }
+
+    if(withRelations)
+      options.include = [
+        {
+          as: 'days',
+          model: DayModel,
+          where: {
+            deletedAt: {
+              [Op.eq]: null
+            }
+          }
+        },
+      ];
 
     return (await CourseModel.findOne(options)) as unknown as Course;
   }

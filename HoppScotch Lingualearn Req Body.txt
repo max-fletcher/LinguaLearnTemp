@@ -12,11 +12,25 @@ avatarUrl: FILE
 
 Course Create/Update:
 
-phoneNumber: +8801762214316
-firstName: new
-lastName: user 2
-email: newuser2@mail.com
-nativeLanguage: English
-learningGoal: Speak english nigga
+title: Test Course 1
+description: Test Course 1 Des
+totalDays: 5
+language: English
+targetLanguage: Bangla
+difficulty: INTERMEDIATE
+estimatedHours: 3
+imagePath: FILE
+
+-------------------------------------
+
+Day Create/Update
+
+{
+  "id": "0196e28c-8c29-7671-925e-11b75b169775", (UPDATE ONLY)
+  "courseId": "0196e270-1fe2-744e-82d4-30db26e4dac6",
+  "dayNumber": 5,
+  "title": "Test Day 1 Edited",
+  "description": "Test Day 1 Des Edited"
+}
 
 -------------------------------------
